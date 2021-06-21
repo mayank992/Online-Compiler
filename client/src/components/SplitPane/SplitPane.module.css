@@ -1,0 +1,25 @@
+.splitPane {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.seperator {
+  background-color: #ffffff;
+  cursor: col-resize;
+  height: 100%;
+  width: 10px;
+}
+
+.leftPane {
+  min-width: 33%;
+}
+
+.rightPane {
+  flex-grow: 1;
+  min-width: 20%;
+}
+
+.cursorColResize {
+  cursor: col-resize;
+}
