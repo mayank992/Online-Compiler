@@ -18,7 +18,7 @@ function App() {
 
   const codeRunHandler = () => {
     const options = {
-      url: 'https://git.heroku.com/one-compiler.git/run',
+      url: 'https://one-compiler.herokuapp.com/run',
       method: 'POST',
       headers: {
         Accept: 'application/json',
