@@ -4,7 +4,7 @@ const express = require('express');
 const submissions = require('./submissions.route.js');
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 const publicDirPath = path.join(__dirname, '../client/build');
 
 // middlewares

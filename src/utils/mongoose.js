@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-const dbName = process.env.DBName;
 const mongoDB_URL = process.env.MONGODB_URL;
 const options = {
   useNewUrlParser: true,
@@ -9,7 +8,7 @@ const options = {
   useFindAndModify: false,
 };
 
-mongoose.connect(`${mongoDB_URL}/${dbName}`, options).catch((error) => {
+mongoose.connect(mongoDB_URL, options).catch((error) => {
   console.log(error);
 });
 
