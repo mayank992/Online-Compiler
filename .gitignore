@@ -1,1 +1,12 @@
-node_modules
+.git/
+
+# dependencies
+/node_modules
+/client/node_modules
+
+# production
+/client/build
+
+#development
+.env
+Dockerfile
