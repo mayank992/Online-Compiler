@@ -8,7 +8,7 @@ function compileCCpp(tmpDirPath, fileName) {
     const errorFilePath = path.join(tmpDirPath, 'error.txt');
     const errorW = fs.createWriteStream(errorFilePath);
 
-    const compile = spawn('g++', ['-o', 'executable', fileName], {
+    const compile = spawn('gcc', ['-o', 'executable', fileName], {
       cwd: tmpDirPath,
     });
 
