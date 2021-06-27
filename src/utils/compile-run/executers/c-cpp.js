@@ -1,14 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
-const { time, clear } = require('console');
 
 function compileCCpp(tmpDirPath, fileName) {
   return new Promise((resolve, reject) => {
     const errorFilePath = path.join(tmpDirPath, 'error.txt');
     const errorW = fs.createWriteStream(errorFilePath);
 
-    const compile = spawn('gcc', ['-o', 'executable', fileName], {
+    const compile = spawn('gcc', ['-o', 'executable', fileName, '-lstdc++'], {
       cwd: tmpDirPath,
     });
 
@@ -31,7 +30,7 @@ function compileCCpp(tmpDirPath, fileName) {
 }
 
 function runCCpp(tmpDirPath, input = '', expectedOutput = '') {
-  input = input.trim() + '\n';
+  input = input.trim();
   expectedOutput = expectedOutput.trim();
 
   return new Promise((resolve, reject) => {
@@ -42,7 +41,17 @@ function runCCpp(tmpDirPath, input = '', expectedOutput = '') {
       cwd: tmpDirPath,
     });
 
-    execute.stdin.write(input);
+    if (execute.stdin) {
+      execute.stdin.on('error', (error) => {
+        return;
+      });
+
+      execute.stdin.write(input + '\r\n', (err) => {
+        if (!err) {
+          execute.stdin.end();
+        }
+      });
+    }
 
     const timeout = setTimeout(() => {
       try {
@@ -51,7 +60,7 @@ function runCCpp(tmpDirPath, input = '', expectedOutput = '') {
         console.log('Cannot kill process');
         reject({ error: 'Canot Kill Process' });
       }
-    }, 10 * 1000);
+    }, 10 * 1000); // 10sec limit
 
     let output = '';
     execute.stdout.on('data', (chunk) => {
@@ -66,6 +75,7 @@ function runCCpp(tmpDirPath, input = '', expectedOutput = '') {
     execute.on('error', (error) => {
       clearTimeout(timeout);
       reject(error);
+      execute.removeAllListeners();
     });
 
     execute.on('close', async (exitCode, signal) => {

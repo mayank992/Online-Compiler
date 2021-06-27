@@ -4,11 +4,11 @@
   "description": "",
   "main": "./src/index.js",
   "scripts": {
-    "build": "cd client && npm run build",
+    "build-client": "cd client && npm run build",
     "install-client": "cd client && npm install",
-    "heroku-postbuild": "npm run install-client && npm run build",
+    "heroku-postbuild": "npm run install-client && npm run build-client",
     "start": "node src/index.js",
-    "dev": "nodemon -r dotenv/config ./src/index.js"
+    "dev": "nodemon --inspect -r dotenv/config ./src/index.js"
   },
   "author": "",
   "license": "ISC",

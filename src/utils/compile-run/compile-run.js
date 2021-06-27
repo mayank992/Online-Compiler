@@ -61,9 +61,9 @@ taskQueue.on('next', async () => {
     path.join(tmpDirPath, `solution.${extension}`)
   );
 
-  const cleanup = async () => {
+  const cleanup = () => {
     taskQueue.decrementTasksRunning();
-    await fs.promises.rmdir(tmpDirPath, { recursive: true });
+    fs.promises.rmdir(tmpDirPath, { recursive: true });
   };
 
   solutionW.write(taskData.code, async () => {
@@ -86,23 +86,17 @@ taskQueue.on('next', async () => {
         } else {
           for (let itr = 0; itr < taskData.testCases.length; itr++) {
             const { input, output } = taskData.testCases[itr];
+            const execRes = await runCCpp(tmpDirPath, input, output);
 
-            try {
-              const execRes = await runCCpp(tmpDirPath, input, output);
-
-              if (execRes.verdict !== 'RE' && execRes.verdict !== 'WA') {
-                passed++;
-              }
-
-              testCasesData.push(execRes);
-            } catch (error) {
-              cleanup();
-              reject(error);
+            if (execRes.verdict !== 'RE' && execRes.verdict !== 'WA') {
+              passed++;
             }
+
+            testCasesData.push(execRes);
           }
         }
 
-        cleanup();
+        // cleanup();
         resolve({
           verdict: 'Successfully Executed',
           exitCode: 0,
