@@ -73,5 +73,6 @@ module.exports.runCode = async function (req, res) {
     res.send(response);
   } catch (error) {
     res.status(500).end();
+    console.log(error);
   }
 };

@@ -8,6 +8,12 @@ import './App.css';
 // temporary imports
 import testCasesData from './components/RightPane/TestCases/testsData';
 
+const supportedLanguages = ['C', 'C++'];
+const languageAPIMapping = {
+  C: 'c',
+  'C++': 'cpp',
+};
+
 function App() {
   const [code, setCode] = useState('');
   const [language, setLanguage] = useState('C++');
@@ -19,7 +25,7 @@ function App() {
   const codeRunHandler = () => {
     const options = {
       url: 'https://one-compiler.herokuapp.com/run',
-      // url: 'http://localhost:3000/run',
+      // url: 'http://localhost:4000/run',
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -27,7 +33,7 @@ function App() {
       },
       data: {
         code,
-        language: 'cpp',
+        language: languageAPIMapping[language],
         testCases,
       },
     };
@@ -53,7 +59,7 @@ function App() {
             setCode={setCode}
             language={language}
             setLanguage={setLanguage}
-            supportedLanguages={['C', 'C++', 'Javascript']}
+            supportedLanguages={supportedLanguages}
             run={codeRunHandler}
           />
         }

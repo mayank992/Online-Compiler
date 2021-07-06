@@ -2,6 +2,7 @@ const testCases = [
   {
     input: '123',
     output: '123',
+    selected: false,
   },
   {
     input: '123',

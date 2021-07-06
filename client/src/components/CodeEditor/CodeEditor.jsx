@@ -73,6 +73,12 @@ function CodeEditor({
     setLanguage(e.target.innerText);
   };
 
+  const handleTabKeyPress = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // console.log(e);
+  };
+
   return (
     <div className={styles.editorRoot}>
       <div className={styles.editorTopBar}>
@@ -95,6 +101,7 @@ function CodeEditor({
           value={code}
           onChange={codeChangeHandler}
           placeholder="Write your code here..."
+          onKeyPress={handleTabKeyPress}
         ></textarea>
       </div>
       <div className={styles.editorBottomBar}>
