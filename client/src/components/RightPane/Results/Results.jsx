@@ -7,14 +7,18 @@ function Results({ resultsState, results }) {
     <div className={styles.loader}></div>
   ) : (
     <div className={styles.results}>
-      {results.map((result, index) => (
-        <TestCase
-          verdict={result.verdict}
-          testCaseName={` Result ${result.testCaseNo + 1}`}
-          testCase={result}
-          key={`Result ${index + 1}`}
-        />
-      ))}
+      {results.length ? (
+        results.map((result, index) => (
+          <TestCase
+            verdict={result.verdict}
+            testCaseName={` Result ${result.testCaseNo + 1}`}
+            testCase={result}
+            key={`Result ${index + 1}`}
+          />
+        ))
+      ) : (
+        <p className={styles.message}>No Results</p>
+      )}
     </div>
   );
 }

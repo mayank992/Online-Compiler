@@ -15,16 +15,20 @@ function TestCases({ testCases, setTestCases }) {
 
   return (
     <div className={styles.testCases}>
-      {testCases.map((testCase, index) => {
-        return (
-          <TestCase
-            testCaseName={`Test Case ${testCase.testCaseNo + 1}`}
-            testCase={testCase}
-            key={`Test Case ${index + 1}`}
-            testCaseCheckedHandler={testCaseCheckedHandler}
-          />
-        );
-      })}
+      {testCases.length ? (
+        testCases.map((testCase, index) => {
+          return (
+            <TestCase
+              testCaseName={`Test Case ${testCase.testCaseNo + 1}`}
+              testCase={testCase}
+              key={`Test Case ${index + 1}`}
+              testCaseCheckedHandler={testCaseCheckedHandler}
+            />
+          );
+        })
+      ) : (
+        <p className={styles.message}>No Test Cases</p>
+      )}
     </div>
   );
 }

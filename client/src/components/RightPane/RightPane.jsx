@@ -1,51 +1,70 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Results from './Results/Results';
 import TestCases from './TestCases/TestCases';
+import Modal from '../Extras/Modal/Modal';
+import InputTestCase from './InputTestCase/InputTestCase';
 import styles from './RightPane.module.css';
 
-function RightPane({ resultsState, testCases, results, setTestCases }) {
-  const [selected, setSelected] = useState('testcases');
+function RightPane({
+  resultsState,
+  setResultsState,
+  testCases,
+  results,
+  setTestCases,
+  addTestCase,
+}) {
+  const [showTestCaseInput, setShowTestCaseInput] = useState(0);
 
-  useEffect(() => {
-    let newState = '';
-    if (resultsState === 'selected' || resultsState === 'loading')
-      newState = 'results';
-    else newState = 'testcases';
+  const toggleInput = () => {
+    setShowTestCaseInput(!showTestCaseInput);
+  };
 
-    setSelected(newState);
-  }, [resultsState]);
+  const addTestCaseHandler = (testCase) => {
+    toggleInput();
+    addTestCase(testCase);
+  };
 
   return (
     <div className={styles.rightPane}>
       <div className={styles.rightPaneTopBar}>
         <div
           className={`${styles.btn} ${
-            selected === 'testcases' ? styles.btnSelected : ''
+            resultsState === 'not-selected' ? styles.btnSelected : ''
           }`}
-          onClick={() => setSelected('testcases')}
+          onClick={() => setResultsState('not-selected')}
         >
           <p>Test Cases</p>
         </div>
         <div
           className={`${styles.btn} ${
-            selected === 'results' ? styles.btnSelected : ''
+            resultsState === 'selected' || resultsState === 'loading'
+              ? styles.btnSelected
+              : ''
           }`}
-          onClick={() => setSelected('results')}
+          onClick={() => setResultsState('selected')}
         >
           <p>Results</p>
         </div>
       </div>
       <div className={styles.bodyContainer}>
-        {selected === 'testcases' ? (
+        {resultsState === 'not-selected' ? (
           <TestCases testCases={testCases} setTestCases={setTestCases} />
         ) : (
           <Results resultsState={resultsState} results={results} />
         )}
       </div>
       <div className={styles.rightPaneBottomBar}>
-        <button>Add Test Case</button>
+        <button onClick={toggleInput}>Add Test Case</button>
         <button>Delete Selected</button>
       </div>
+      {showTestCaseInput ? (
+        <Modal>
+          <InputTestCase
+            toggleInput={toggleInput}
+            addTestCase={addTestCaseHandler}
+          />
+        </Modal>
+      ) : null}
     </div>
   );
 }

@@ -10,8 +10,8 @@ const Modal = ({ children, className, style }) => {
 
   useEffect(() => {
     modalRoot.appendChild(elRef.current);
-    elRef.current.className = className;
-    elRef.current.setAttribute('style', style);
+    elRef.current.className = className ? className : '';
+    elRef.current.setAttribute('style', style ? style : '');
     return () => modalRoot.removeChild(elRef.current);
   });
 

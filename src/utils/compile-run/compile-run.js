@@ -96,7 +96,7 @@ taskQueue.on('next', async () => {
           }
         }
 
-        // cleanup();
+        cleanup();
         resolve({
           verdict: 'Successfully Executed',
           exitCode: 0,
