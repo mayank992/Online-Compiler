@@ -15,8 +15,21 @@
   font-size: 1rem;
 }
 
-.checkBox {
-  margin: auto 15px;
+.checkboxContainer {
+  margin: auto 8px;
+  border-radius: 10px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.checkboxContainer:hover {
+  background-color: #eeeeee;
+}
+
+input[type='checkbox'] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
 }
 
 .name {
@@ -50,7 +63,7 @@
 
 .moreIcon {
   margin: auto 10px;
-  height: 60%;
+  height: 50%;
   cursor: pointer;
 }
 

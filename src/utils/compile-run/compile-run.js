@@ -85,14 +85,14 @@ taskQueue.on('next', async () => {
           });
         } else {
           for (let itr = 0; itr < taskData.testCases.length; itr++) {
-            const { input, output } = taskData.testCases[itr];
+            const { input, output, testCaseNo } = taskData.testCases[itr];
             const execRes = await runCCpp(tmpDirPath, input, output);
 
             if (execRes.verdict !== 'RE' && execRes.verdict !== 'WA') {
               passed++;
             }
 
-            testCasesData.push(execRes);
+            testCasesData.push({ ...execRes, testCaseNo });
           }
         }
 

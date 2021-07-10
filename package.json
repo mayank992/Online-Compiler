@@ -8,7 +8,7 @@
     "install-client": "cd client && npm install",
     "client": "npm run install-client && npm run build-client",
     "start": "node src/index.js",
-    "dev": "npm run set-up-client && nodemon --inspect -r dotenv/config ./src/index.js"
+    "dev": "npm run client && nodemon --inspect -r dotenv/config ./src/index.js"
   },
   "author": "",
   "license": "ISC",

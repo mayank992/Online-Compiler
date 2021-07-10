@@ -10,7 +10,7 @@ function Results({ resultsState, results }) {
       {results.map((result, index) => (
         <TestCase
           verdict={result.verdict}
-          testCaseName={` Result ${index + 1}`}
+          testCaseName={` Result ${result.testCaseNo + 1}`}
           testCase={result}
           key={`Result ${index + 1}`}
         />

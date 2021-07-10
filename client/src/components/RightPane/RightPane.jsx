@@ -3,7 +3,7 @@ import Results from './Results/Results';
 import TestCases from './TestCases/TestCases';
 import styles from './RightPane.module.css';
 
-function RightPane({ resultsState, testCases, results }) {
+function RightPane({ resultsState, testCases, results, setTestCases }) {
   const [selected, setSelected] = useState('testcases');
 
   useEffect(() => {
@@ -37,7 +37,7 @@ function RightPane({ resultsState, testCases, results }) {
       </div>
       <div className={styles.bodyContainer}>
         {selected === 'testcases' ? (
-          <TestCases testCases={testCases} />
+          <TestCases testCases={testCases} setTestCases={setTestCases} />
         ) : (
           <Results resultsState={resultsState} results={results} />
         )}

@@ -17,14 +17,27 @@ function SubItem({ displayPropertyName, propertyName, items }) {
 }
 
 // This component can also be used to show the results to the user
-function TestCase({ testCaseName, testCase }) {
+function TestCase({ testCaseName, testCase, testCaseCheckedHandler }) {
   const verdict = testCase.verdict;
   const [isOpen, setIsOpen] = useState(false);
+
+  const testCasehandler = () => {
+    testCaseCheckedHandler(testCase.testCaseNo);
+  };
 
   return (
     <div className={styles.testCase}>
       <div className={styles.testCaseBar}>
-        {verdict ? null : <input className={styles.checkBox} type="checkbox" />}
+        {verdict ? null : (
+          <label className={styles.checkboxContainer}>
+            <input
+              className={styles.checkBox}
+              type="checkbox"
+              checked={testCase.checked ? 'checked' : ''}
+              onChange={testCasehandler}
+            />
+          </label>
+        )}
 
         <div
           className={styles.middleSection}

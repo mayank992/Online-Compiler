@@ -22,10 +22,9 @@ function App() {
   // loading, not-selected, selected
   const [results, setResults] = useState([]);
 
-  const codeRunHandler = () => {
+  const runCode = (testCases) => {
     const options = {
       url: 'https://one-compiler.herokuapp.com/run',
-      // url: 'http://localhost:4000/run',
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -42,12 +41,29 @@ function App() {
 
     axios(options).then((response) => {
       setResultsState('selected');
+
       const testCasesResult = response.data.testCasesData.map((testCase) => {
-        return { ...testCase.testCaseInfo, verdict: testCase.verdict };
+        return {
+          ...testCase.testCaseInfo,
+          verdict: testCase.verdict,
+          testCaseNo: testCase.testCaseNo,
+        };
       });
 
       setResults(testCasesResult);
     });
+  };
+
+  const codeRunAllHandler = () => {
+    runCode(testCases);
+  };
+
+  const codeRunSelectedHandler = () => {
+    let selectedTestCases = [];
+
+    selectedTestCases = testCases.filter((testCase) => testCase.checked);
+
+    runCode(selectedTestCases);
   };
 
   return (
@@ -60,7 +76,8 @@ function App() {
             language={language}
             setLanguage={setLanguage}
             supportedLanguages={supportedLanguages}
-            run={codeRunHandler}
+            runSelected={codeRunSelectedHandler}
+            runAll={codeRunAllHandler}
           />
         }
         right={
@@ -68,6 +85,7 @@ function App() {
             resultsState={resultsState}
             results={results}
             testCases={testCases}
+            setTestCases={setTestCases}
           />
         }
       />

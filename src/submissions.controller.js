@@ -70,6 +70,7 @@ module.exports.runCode = async function (req, res) {
       { new: true }
     );
 
+    response._doc.testCasesData = result.testCasesData;
     res.send(response);
   } catch (error) {
     res.status(500).end();

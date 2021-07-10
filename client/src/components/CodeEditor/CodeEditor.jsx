@@ -11,7 +11,8 @@ function LineNumber({ number }) {
 }
 
 function CodeEditor({
-  run,
+  runAll,
+  runSelected,
   code,
   setCode,
   language,
@@ -19,11 +20,17 @@ function CodeEditor({
   supportedLanguages,
 }) {
   const [numberOfLines, setNumberOfLines] = useState(1);
+  const [caretPosition, setCaretPosition] = useState(0);
   const [lineNumbers, setLineNumbers] = useState();
   const lineNumbersDiv = useRef(null);
   const textArea = useRef(null);
   let isSyncingLeftScroll = false;
   let isSyncingRightScroll = false;
+
+  useEffect(() => {
+    textArea.current.selectionStart = caretPosition;
+    textArea.current.selectionEnd = caretPosition;
+  }, [caretPosition]);
 
   useEffect(() => {
     const newLineNumbers = [];
@@ -46,6 +53,8 @@ function CodeEditor({
 
       return numberOfLines - (oldNumberOfLines - newNumberOfLines);
     });
+
+    setCaretPosition(e.target.selectionStart);
 
     setCode(e.target.value);
   };
@@ -74,9 +83,20 @@ function CodeEditor({
   };
 
   const handleTabKeyPress = (e) => {
+    if (e.key !== 'Tab') return;
+
     e.preventDefault();
     e.stopPropagation();
-    // console.log(e);
+
+    const selectionStart = e.target.selectionStart;
+
+    setCode(
+      code.substring(0, selectionStart) +
+        '    ' +
+        code.substring(selectionStart)
+    );
+
+    setCaretPosition(e.target.selectionStart + 4);
   };
 
   return (
@@ -101,7 +121,7 @@ function CodeEditor({
           value={code}
           onChange={codeChangeHandler}
           placeholder="Write your code here..."
-          onKeyPress={handleTabKeyPress}
+          onKeyDown={handleTabKeyPress}
         ></textarea>
       </div>
       <div className={styles.editorBottomBar}>
@@ -122,8 +142,10 @@ function CodeEditor({
             {language}
           </Menu>
         </div>
-        <button className={styles.runSelected}>Run Selected</button>
-        <button onClick={run}>Run All</button>
+        <button className={styles.runSelected} onClick={runSelected}>
+          Run Selected
+        </button>
+        <button onClick={runAll}>Run All</button>
       </div>
     </div>
   );
