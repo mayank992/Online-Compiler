@@ -80,11 +80,13 @@ function TestCase({ testCaseName, testCase, testCaseCheckedHandler }) {
             propertyName="input"
             items={testCase}
           />
-          <SubItem
-            displayPropertyName="Output"
-            propertyName="output"
-            items={testCase}
-          />
+          {testCase.verdict !== 'RE' ? (
+            <SubItem
+              displayPropertyName="Output"
+              propertyName="output"
+              items={testCase}
+            />
+          ) : null}
           {testCase.expectedOutput && (
             <SubItem
               displayPropertyName="Expected Output"
@@ -92,6 +94,14 @@ function TestCase({ testCaseName, testCase, testCaseCheckedHandler }) {
               items={testCase}
             />
           )}
+          {testCase.verdict === 'RE' ? (
+            <div className={styles.error}>
+              <h3>Error: </h3>
+              <pre>
+                <p>{testCase.stderr}</p>
+              </pre>
+            </div>
+          ) : null}
         </div>
       ) : null}
     </div>

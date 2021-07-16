@@ -6,8 +6,8 @@ import InputTestCase from './InputTestCase/InputTestCase';
 import styles from './RightPane.module.css';
 
 function RightPane({
-  resultsState,
-  setResultsState,
+  rightPaneState,
+  setRightPaneState,
   testCases,
   results,
   setTestCases,
@@ -29,28 +29,26 @@ function RightPane({
       <div className={styles.rightPaneTopBar}>
         <div
           className={`${styles.btn} ${
-            resultsState === 'not-selected' ? styles.btnSelected : ''
+            rightPaneState === 'test-cases' ? styles.btnSelected : ''
           }`}
-          onClick={() => setResultsState('not-selected')}
+          onClick={() => setRightPaneState('test-cases')}
         >
           <p>Test Cases</p>
         </div>
         <div
           className={`${styles.btn} ${
-            resultsState === 'selected' || resultsState === 'loading'
-              ? styles.btnSelected
-              : ''
+            rightPaneState === 'results' ? styles.btnSelected : ''
           }`}
-          onClick={() => setResultsState('selected')}
+          onClick={() => setRightPaneState('results')}
         >
           <p>Results</p>
         </div>
       </div>
       <div className={styles.bodyContainer}>
-        {resultsState === 'not-selected' ? (
+        {rightPaneState === 'test-cases' ? (
           <TestCases testCases={testCases} setTestCases={setTestCases} />
         ) : (
-          <Results resultsState={resultsState} results={results} />
+          <Results results={results} />
         )}
       </div>
       <div className={styles.rightPaneBottomBar}>

@@ -1,6 +1,7 @@
 .editorRoot {
   width: 100%;
   height: 100%;
+  font-size: 1.6rem;
 }
 
 .editorTopBar,
@@ -41,7 +42,8 @@
 
 .lineNumber {
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.6rem;
+  line-height: 1.6rem;
   padding-right: 8px;
   color: #7e7e7e;
 }
@@ -56,9 +58,9 @@
   height: 100%;
   resize: none;
   overflow: auto;
-  font-size: 1rem;
+  font-size: 1.6rem;
   border-style: none;
-  line-height: 1rem;
+  line-height: 1.6rem;
   box-sizing: border-box;
 }
 
@@ -80,7 +82,7 @@
   color: #464545;
   border-radius: 13px;
   margin-right: 10px;
-  font-size: 0.9rem;
+  font-size: 1.6rem;
   min-width: 100px;
 }
 

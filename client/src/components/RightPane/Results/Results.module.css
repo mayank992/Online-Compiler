@@ -34,10 +34,51 @@
   height: 100%;
   overflow-y: auto;
   position: relative;
+  font-size: 1.6rem;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
 }
 
 .results .message {
   position: absolute;
   top: 40%;
   left: 40%;
+}
+
+.resultDiv {
+  margin: 20px auto;
+  width: 95%;
+  padding: 20px;
+  font-size: 1.6rem;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+}
+
+.SE {
+  background-color: rgba(3, 171, 15, 0.2);
+}
+
+.RE,
+.CE {
+  background-color: rgba(204, 31, 31, 0.2);
+}
+
+.error {
+  font-size: 1.6rem;
+  margin: 20px auto;
+  max-width: 95%;
+  overflow: auto;
+  color: #d05451;
+  border: 1px solid rgba(169, 68, 66, 0.5);
+  box-shadow: 0 0 4px rgb(169 68 66 / 50%);
+  background-color: #fff;
+  padding: 10px;
+  box-sizing: border-box;
+  max-height: 60vh;
 }

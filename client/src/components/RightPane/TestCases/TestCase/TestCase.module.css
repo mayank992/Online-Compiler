@@ -1,8 +1,9 @@
 .testCase {
   width: calc(100% - 20px);
-  background-color: #eeeeee;
+  background-color: #ececec;
   margin: 10px;
   border-radius: 15px;
+  font-size: 1.6rem;
 }
 
 .testCaseBar {
@@ -12,7 +13,7 @@
   border-radius: 15px;
   display: flex;
   align-items: center;
-  font-size: 1rem;
+  font-size: 1.6rem;
 }
 
 .checkboxContainer {
@@ -123,4 +124,18 @@ input[type='checkbox'] {
 
 .itemData {
   padding: 10px;
+}
+
+.error {
+  font-size: 1.6rem;
+  margin: 20px auto;
+  width: 95%;
+  overflow: auto;
+  color: #d05451;
+  border: 1px solid rgba(169, 68, 66, 0.5);
+  box-shadow: 0 0 4px rgb(169 68 66 / 50%);
+  background-color: #fff;
+  padding: 10px;
+  box-sizing: border-box;
+  max-height: 60vh;
 }

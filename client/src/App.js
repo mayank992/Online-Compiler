@@ -15,14 +15,13 @@ function App() {
   const [code, setCode] = useState('');
   const [language, setLanguage] = useState('C++');
   const [testCases, setTestCases] = useState([]);
-  const [resultsState, setResultsState] = useState('not-selected');
-  // loading, not-selected, selected
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState({});
+  const [rightPaneState, setRightPaneState] = useState('test-cases');
 
   const runCode = (testCases) => {
     if (!testCases.length) {
-      setResultsState('selected');
-      setResults([]);
+      setRightPaneState('results');
+      setResults({});
       return;
     }
 
@@ -40,20 +39,12 @@ function App() {
       },
     };
 
-    setResultsState('loading');
+    setResults(null);
+    setRightPaneState('results');
 
     axios(options).then((response) => {
-      setResultsState('selected');
-
-      const testCasesResult = response.data.testCasesData.map((testCase) => {
-        return {
-          ...testCase.testCaseInfo,
-          verdict: testCase.verdict,
-          testCaseNo: testCase.testCaseNo,
-        };
-      });
-
-      setResults(testCasesResult);
+      setRightPaneState('results');
+      setResults(response.data);
     });
   };
 
@@ -76,7 +67,7 @@ function App() {
 
     oldTestCases.push({ ...testCase, checked: false, testCaseNo });
     setTestCases(oldTestCases);
-    setResultsState('not-selected');
+    setRightPaneState('test-cases');
   };
 
   return (
@@ -95,8 +86,8 @@ function App() {
         }
         right={
           <RightPane
-            resultsState={resultsState}
-            setResultsState={setResultsState}
+            rightPaneState={rightPaneState}
+            setRightPaneState={setRightPaneState}
             results={results}
             testCases={testCases}
             setTestCases={setTestCases}

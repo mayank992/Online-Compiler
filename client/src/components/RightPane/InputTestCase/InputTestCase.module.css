@@ -2,12 +2,13 @@
   background-color: white;
   width: 1000px;
   height: 600px;
-  border-radius: 10px;
+  border-radius: 5px;
+  font-size: 1.6rem;
 }
 
 .topBar {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   width: 100%;
   height: 40px;
   background-color: #c2c1c1;
@@ -15,7 +16,7 @@
 }
 
 .exitSign {
-  border-top-right-radius: 10px;
+  border-top-right-radius: 5px;
   position: absolute;
   width: 50px;
   height: 40px;
@@ -40,7 +41,7 @@
 .bodySection label {
   width: 46%;
   height: 90%;
-  box-shadow: 0px 0px 8px 1px #888888;
+  box-shadow: 0px 0px 1px 1px #888888;
 }
 
 label > div {
@@ -48,7 +49,7 @@ label > div {
   background-color: #f1f1f1;
   text-align: center;
   width: 100%;
-  height: 8%;
+  height: 10%;
   padding: 10px;
 }
 
@@ -56,7 +57,7 @@ label > div {
   box-sizing: border-box;
   width: 100%;
   height: 90%;
-  font-size: 0.9rem;
+  font-size: 1.6rem;
   resize: none;
   overflow: auto;
   white-space: nowrap;
@@ -79,9 +80,8 @@ label > div {
   border: none;
   cursor: pointer;
   border-radius: 10px;
-  padding: 10px;
-  width: 150px;
+  padding: 10px 20px;
   height: 40px;
-  font-size: 0.8rem;
+  font-size: 1.6rem;
   background-color: #c4c4c4;
 }
